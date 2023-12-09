@@ -9,7 +9,7 @@ on:
     - main
 env:
   REGISTRY: ${{ secrets.DOCKER_REGISTRY_URL }}
-  IMAGE_NAME: umesh-mapup-assignement
+  # IMAGE_NAME: umesh-mapup-assignement
 
 jobs:
   build:
@@ -47,7 +47,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          images: ${{ env.REGISTRY }}
 
       # - name: Cache Docker layers
       #   id: cache
