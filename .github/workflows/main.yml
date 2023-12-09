@@ -61,15 +61,24 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
-  notify:
-    runs-on: ubuntu-latest
-    needs: build
-    if: always()
-    steps:
+
       - name: Notify on success or failure
+        if: always()
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
-          SLACK_MESSAGE: 'Post Content :rocket: {"text": "Job ${{ github.job }} on repository ${GITHUB_REPOSITORY} completed.\nOutcome: ${{ job.status }}\nCommit: ${{ github.sha }}\nAuthor: ${{ github.actor }}\nEvent: ${{ github.event_name }}"}'
-          SLACK_TITLE: Post Title
+          SLACK_MESSAGE: Docker image Published status is ${{ job.status }}
+          SLACK_TITLE: Docker Image Status 
+  
+  # notify:
+  #   runs-on: ubuntu-latest
+  #   needs: build
+  #   if: always()
+  #   steps:
+  #     - name: Notify on success or failure
+  #       uses: rtCamp/action-slack-notify@v2
+  #       env:
+  #         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+  #         SLACK_MESSAGE: 'Workflow"Job ${{ github.job }} on repository ${GITHUB_REPOSITORY} completed.\nOutcome: ${{ job.status }}\nCommit: ${{ github.sha }}\nAuthor: ${{ github.actor }}\nEvent: ${{ github.event_name }}"}'
+          # SLACK_TITLE: Post Title
   
