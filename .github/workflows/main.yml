@@ -26,11 +26,8 @@ jobs:
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
-      
-      - name: Set Docker Image Tag
-        run: echo "::set-env name=DOCKER_IMAGE_TAG::$(node -p -e "require('./package.json').version")"
-      
+    
       - name: Build and Push Docker Image
         run: |
-          docker build -t ${{ secrets.DOCKER_REGISTRY_URL }}/umesh-mapup-assignemnt:${{ env.DOCKER_IMAGE_TAG }} .
-          docker push ${{ secrets.DOCKER_REGISTRY_URL }}/umesh-mapup-assignemnt:${{ env.DOCKER_IMAGE_TAG }}
+          docker build -t ${{ secrets.DOCKER_REGISTRY_URL }}/umesh-mapup-assignemnt:${{ github.sha }}  .
+          docker push ${{ secrets.DOCKER_REGISTRY_URL }}/umesh-mapup-assignemnt:${{ github.sha }} 
