@@ -70,5 +70,6 @@ jobs:
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
-        with:
-          args: '{"text": "Job ${{ github.job }} on repository ${GITHUB_REPOSITORY} completed.\nOutcome: ${{ job.status }}\nCommit: ${{ github.sha }}\nAuthor: ${{ github.actor }}\nEvent: ${{ github.event_name }}"}'
+          SLACK_MESSAGE: 'Post Content :rocket: {"text": "Job ${{ github.job }} on repository ${GITHUB_REPOSITORY} completed.\nOutcome: ${{ job.status }}\nCommit: ${{ github.sha }}\nAuthor: ${{ github.actor }}\nEvent: ${{ github.event_name }}"}'
+          SLACK_TITLE: Post Title
+  
